@@ -58,6 +58,27 @@
   });
 
   // ============================================================
+  // Quote of the visit — swap in a random 哲思录 on every page load
+  // (Jekyll renders one server-side as the no-JS fallback)
+  // ============================================================
+  var quoteCard = document.querySelector('.quote-card');
+  var quoteSource = document.querySelector('[data-quotes-source]');
+
+  if (quoteCard && quoteSource) {
+    try {
+      var quotes = JSON.parse(quoteSource.textContent);
+      if (quotes.length) {
+        var pick = quotes[Math.floor(Math.random() * quotes.length)];
+        quoteCard.querySelector('.quote-text').textContent = pick.text;
+        quoteCard.querySelector('.quote-author').textContent = pick.author;
+        quoteCard.querySelector('.quote-work').textContent = pick.work;
+      }
+    } catch (e) {
+      /* Malformed data — keep the server-rendered quote */
+    }
+  }
+
+  // ============================================================
   // Scroll Reveal — subtle, unified
   // ============================================================
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

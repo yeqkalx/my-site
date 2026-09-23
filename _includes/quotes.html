@@ -11,4 +11,7 @@
       <span class="quote-work">{{ quote.work }}</span>
     </div>
   </div>
+
+  <!-- Full list for the client-side randomizer; the card above is the no-JS fallback -->
+  <script type="application/json" data-quotes-source>{{ quotes | jsonify }}</script>
 </div>
